@@ -318,3 +318,4 @@ D:\freelance-reentry-2026\02-dotnet-support-ticket-api\DotnetSupportTicketApi\ob
 D:\freelance-reentry-2026\02-dotnet-support-ticket-api\DotnetSupportTicketApi\obj\Debug\net10.0\DotnetSupportTicketApi.pdb
 D:\freelance-reentry-2026\02-dotnet-support-ticket-api\DotnetSupportTicketApi\obj\Debug\net10.0\DotnetSupportTicketApi.genruntimeconfig.cache
 D:\freelance-reentry-2026\02-dotnet-support-ticket-api\DotnetSupportTicketApi\obj\Debug\net10.0\ref\DotnetSupportTicketApi.dll
+D:\freelance-reentry-2026\02-dotnet-support-ticket-api\DotnetSupportTicketApi\obj\Debug\net10.0\DotnetSupportTicketApi.sourcelink.json

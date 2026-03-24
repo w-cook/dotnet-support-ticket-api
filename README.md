@@ -101,4 +101,7 @@ In progress
 - Core entity classes created
 - Entity Framework Core added
 - AppDbContext created
-- SQL Server LocalDB connection configured
+- SQL Server LocalDB configured
+- Initial migration created
+- Database schema generated successfully
+- Basic seed data added
