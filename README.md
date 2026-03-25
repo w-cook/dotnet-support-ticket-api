@@ -96,12 +96,8 @@ In progress
 
 ## Current Progress
 
-- ASP.NET Core Web API project created
-- OpenAPI and Swagger UI configured
-- Core entity classes created
-- Entity Framework Core added
-- AppDbContext created
-- SQL Server LocalDB configured
-- Initial migration created
-- Database schema generated successfully
-- Basic seed data added
+- database schema created with EF Core
+- sample seed data added
+- `GET /api/tickets/{id}` implemented
+- `POST /api/tickets` implemented
+- ticket creation verified through Swagger and SQL Server Object Explorer
