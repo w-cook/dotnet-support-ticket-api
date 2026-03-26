@@ -96,8 +96,8 @@ In progress
 
 ## Current Progress
 
-- database schema created with EF Core
-- sample seed data added
-- `GET /api/tickets/{id}` implemented
 - `POST /api/tickets` implemented
-- ticket creation verified through Swagger and SQL Server Object Explorer
+- `GET /api/tickets/{id}` implemented
+- `GET /api/tickets` implemented
+- filtering added for status, priority, creator, and assignee
+- filtering verified through Swagger and database inspection

@@ -44,6 +44,52 @@ namespace DotnetSupportTicketApi.Controllers
             return Ok(response);
         }
 
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<TicketResponse>>> GetAll([FromQuery] GetTicketsRequest request)
+        {
+            IQueryable<Ticket> query = _dbContext.Tickets;
+
+            if (!string.IsNullOrWhiteSpace(request.Status))
+            {
+                var normalizedStatus = request.Status.Trim();
+                query = query.Where(t => t.Status == normalizedStatus);
+            }
+
+            if (!string.IsNullOrWhiteSpace(request.Priority))
+            {
+                var normalizedPriority = request.Priority.Trim();
+                query = query.Where(t => t.Priority == normalizedPriority);
+            }
+
+            if (request.CreatedByUserId.HasValue)
+            {
+                query = query.Where(t => t.CreatedByUserId == request.CreatedByUserId.Value);
+            }
+
+            if (request.AssignedToUserId.HasValue)
+            {
+                query = query.Where(t => t.AssignedToUserId == request.AssignedToUserId.Value);
+            }
+
+            var tickets = await query
+                .OrderByDescending(t => t.CreatedAt)
+                .Select(t => new TicketResponse
+                {
+                    Id = t.Id,
+                    Title = t.Title,
+                    Description = t.Description,
+                    Priority = t.Priority,
+                    Status = t.Status,
+                    CreatedAt = t.CreatedAt,
+                    UpdatedAt = t.UpdatedAt,
+                    CreatedByUserId = t.CreatedByUserId,
+                    AssignedToUserId = t.AssignedToUserId
+                })
+                .ToListAsync();
+
+            return Ok(tickets);
+        }
+
         [HttpPost]
         public async Task<ActionResult<TicketResponse>> Create(CreateTicketRequest request)
         {
