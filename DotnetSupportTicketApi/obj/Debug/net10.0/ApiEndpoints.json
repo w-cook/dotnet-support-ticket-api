@@ -101,5 +101,36 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "DotnetSupportTicketApi.Controllers.TicketsController",
+    "Method": "UpdateStatus",
+    "RelativePath": "api/Tickets/{id}/status",
+    "HttpMethod": "PATCH",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      },
+      {
+        "Name": "request",
+        "Type": "DotnetSupportTicketApi.DTOs.UpdateTicketStatusRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "DotnetSupportTicketApi.DTOs.TicketResponse",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   }
 ]

@@ -98,6 +98,7 @@ In progress
 
 - `POST /api/tickets` implemented
 - `GET /api/tickets/{id}` implemented
-- `GET /api/tickets` implemented
-- filtering added for status, priority, creator, and assignee
-- filtering verified through Swagger and database inspection
+- `GET /api/tickets` implemented with filtering
+- `PATCH /api/tickets/{id}/status` implemented
+- status history entries are created when ticket status changes
+- status update behavior verified in Swagger and SQL Server Object Explorer

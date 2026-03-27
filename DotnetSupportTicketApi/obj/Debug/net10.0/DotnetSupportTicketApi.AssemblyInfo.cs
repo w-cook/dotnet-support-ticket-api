@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DotnetSupportTicketApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+21571dee5108793303bbf7342b36a57ec3ca6aa6")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+12b0904bda2f104170799be938a2ec2859ca062b")]
 [assembly: System.Reflection.AssemblyProductAttribute("DotnetSupportTicketApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DotnetSupportTicketApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

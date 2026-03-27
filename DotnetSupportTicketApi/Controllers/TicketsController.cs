@@ -10,6 +10,14 @@ namespace DotnetSupportTicketApi.Controllers
     [Route("api/[controller]")]
     public class TicketsController : ControllerBase
     {
+        private static readonly HashSet<string> AllowedStatuses = new(StringComparer.OrdinalIgnoreCase)
+            {
+                "Open",
+                "InProgress",
+                "Resolved",
+                "Closed"
+            };
+
         private readonly AppDbContext _dbContext;
 
         public TicketsController(AppDbContext dbContext)
@@ -143,6 +151,94 @@ namespace DotnetSupportTicketApi.Controllers
             };
 
             return CreatedAtAction(nameof(GetById), new { id = ticket.Id }, response);
+        }
+
+        [HttpPatch("{id:int}/status")]
+        public async Task<ActionResult<TicketResponse>> UpdateStatus(
+            [FromRoute] int id,
+            UpdateTicketStatusRequest request)
+        {
+            var ticket = await _dbContext.Tickets
+                .FirstOrDefaultAsync(t => t.Id == id);
+
+            if (ticket == null)
+            {
+                return NotFound();
+            }
+
+            var normalizedStatus = NormalizeStatus(request.Status);
+
+            if (string.IsNullOrWhiteSpace(normalizedStatus))
+            {
+                return BadRequest("Status is required.");
+            }
+
+            if (!AllowedStatuses.Contains(normalizedStatus))
+            {
+                return BadRequest($"Status '{normalizedStatus}' is not valid.");
+            }
+
+            if (string.Equals(ticket.Status, normalizedStatus, StringComparison.OrdinalIgnoreCase))
+            {
+                var unchangedResponse = new TicketResponse
+                {
+                    Id = ticket.Id,
+                    Title = ticket.Title,
+                    Description = ticket.Description,
+                    Priority = ticket.Priority,
+                    Status = ticket.Status,
+                    CreatedAt = ticket.CreatedAt,
+                    UpdatedAt = ticket.UpdatedAt,
+                    CreatedByUserId = ticket.CreatedByUserId,
+                    AssignedToUserId = ticket.AssignedToUserId
+                };
+
+                return Ok(unchangedResponse);
+            }
+
+            var oldStatus = ticket.Status;
+
+            ticket.Status = normalizedStatus;
+            ticket.UpdatedAt = DateTime.UtcNow;
+
+            var historyEntry = new StatusHistory
+            {
+                TicketId = ticket.Id,
+                OldStatus = oldStatus,
+                NewStatus = normalizedStatus,
+                ChangedAt = DateTime.UtcNow
+            };
+
+            _dbContext.StatusHistoryEntries.Add(historyEntry);
+
+            await _dbContext.SaveChangesAsync();
+
+            var response = new TicketResponse
+            {
+                Id = ticket.Id,
+                Title = ticket.Title,
+                Description = ticket.Description,
+                Priority = ticket.Priority,
+                Status = ticket.Status,
+                CreatedAt = ticket.CreatedAt,
+                UpdatedAt = ticket.UpdatedAt,
+                CreatedByUserId = ticket.CreatedByUserId,
+                AssignedToUserId = ticket.AssignedToUserId
+            };
+
+            return Ok(response);
+        }
+
+        private static string NormalizeStatus(string status)
+        {
+            return status.Trim().ToLowerInvariant() switch
+            {
+                "open" => "Open",
+                "inprogress" => "InProgress",
+                "resolved" => "Resolved",
+                "closed" => "Closed",
+                _ => status
+            };
         }
     }
 }
