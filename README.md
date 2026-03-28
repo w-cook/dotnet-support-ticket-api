@@ -102,3 +102,6 @@ In progress
 - `PATCH /api/tickets/{id}/status` implemented
 - status history entries are created when ticket status changes
 - status update behavior verified in Swagger and SQL Server Object Explorer
+- `POST /api/tickets/{id}/comments` implemented
+- `GET /api/tickets/{id}/comments` implemented
+- comment creation verified through Swagger and SQL Server Object Explorer

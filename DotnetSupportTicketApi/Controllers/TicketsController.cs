@@ -3,6 +3,7 @@ using DotnetSupportTicketApi.DTOs;
 using DotnetSupportTicketApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace DotnetSupportTicketApi.Controllers
 {
@@ -98,6 +99,37 @@ namespace DotnetSupportTicketApi.Controllers
             return Ok(tickets);
         }
 
+        [HttpGet("{id:int}/comments")]
+        public async Task<ActionResult<IEnumerable<CommentResponse>>> GetAll(
+            [FromRoute] int id)
+        {
+            var ticket = await _dbContext.Tickets
+                .FirstOrDefaultAsync(t => t.Id == id);
+
+            if (ticket == null)
+            {
+                return NotFound();
+            }
+
+            IQueryable<Comment> query = _dbContext.Comments;
+
+            query = query.Where(t => t.TicketId == id);
+
+            var comments = await query
+                .OrderByDescending(c => c.CreatedAt)
+                .Select(c => new CommentResponse
+                {
+                    Id = c.Id,
+                    TicketId = c.TicketId,
+                    AuthorUserId = c.AuthorUserId,
+                    Body = c.Body,
+                    CreatedAt = c.CreatedAt
+                })
+                .ToListAsync();
+
+            return Ok(comments);
+        }
+
         [HttpPost]
         public async Task<ActionResult<TicketResponse>> Create(CreateTicketRequest request)
         {
@@ -151,6 +183,64 @@ namespace DotnetSupportTicketApi.Controllers
             };
 
             return CreatedAtAction(nameof(GetById), new { id = ticket.Id }, response);
+        }
+
+        [HttpPost("{id:int}/comments")]
+        public async Task<ActionResult<CommentResponse>> Create(
+            [FromRoute] int id,
+            CreateCommentRequest request)
+        {
+            var ticket = await _dbContext.Tickets
+                .FirstOrDefaultAsync(t => t.Id == id);
+
+            if (ticket == null)
+            {
+                return NotFound($"TicketId {id} does not exist.");
+            }
+
+            var author = await _dbContext.AppUsers
+                .FirstOrDefaultAsync(u => u.Id == request.AuthorUserId);
+
+            if (author == null)
+            {
+                return BadRequest($"AuthorUserId {request.AuthorUserId} does not exist.");
+            }
+
+            var normalizedBody = request.Body.Trim();
+
+            if (string.IsNullOrWhiteSpace(normalizedBody))
+            {
+                return BadRequest($"Comment Body is required.");
+            }
+
+            if (normalizedBody.Length >= 2000) 
+            {
+                return BadRequest($"Comment Body must be less than 2000 characters.");
+            }
+
+            var comment = new Comment
+            {
+                TicketId = ticket.Id,
+                Ticket = ticket,
+                AuthorUserId = author.Id,
+                AuthorUser = author,
+                Body = normalizedBody,
+                CreatedAt = DateTime.UtcNow
+            };
+
+            _dbContext.Comments.Add(comment);
+            await _dbContext.SaveChangesAsync();
+
+            var response = new CommentResponse
+            {
+                Id = comment.Id,
+                TicketId = comment.TicketId,
+                AuthorUserId = comment.AuthorUserId,
+                Body = comment.Body,
+                CreatedAt = comment.CreatedAt
+            };
+
+            return CreatedAtAction(nameof(GetById), new { id = comment.Id }, response);
         }
 
         [HttpPatch("{id:int}/status")]

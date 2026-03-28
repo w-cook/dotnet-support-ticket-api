@@ -3,28 +3,16 @@
   "WorkspaceRootPath": "D:\\freelance-reentry-2026\\02-dotnet-support-ticket-api\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F28CF32B-0ED1-CDFD-B499-8663AFEA9059}|DotnetSupportTicketApi\\DotnetSupportTicketApi.csproj|d:\\freelance-reentry-2026\\02-dotnet-support-ticket-api\\dotnetsupportticketapi\\controllers\\ticketscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F28CF32B-0ED1-CDFD-B499-8663AFEA9059}|DotnetSupportTicketApi\\DotnetSupportTicketApi.csproj|solutionrelative:dotnetsupportticketapi\\controllers\\ticketscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:1:0:{F28CF32B-0ED1-CDFD-B499-8663AFEA9059}|DotnetSupportTicketApi\\DotnetSupportTicketApi.csproj|d:\\freelance-reentry-2026\\02-dotnet-support-ticket-api\\dotnetsupportticketapi\\controllers\\ticketscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:1:0:{F28CF32B-0ED1-CDFD-B499-8663AFEA9059}|DotnetSupportTicketApi\\DotnetSupportTicketApi.csproj|solutionrelative:dotnetsupportticketapi\\controllers\\ticketscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F28CF32B-0ED1-CDFD-B499-8663AFEA9059}|DotnetSupportTicketApi\\DotnetSupportTicketApi.csproj|d:\\freelance-reentry-2026\\02-dotnet-support-ticket-api\\dotnetsupportticketapi\\dtos\\updateticketstatusrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F28CF32B-0ED1-CDFD-B499-8663AFEA9059}|DotnetSupportTicketApi\\DotnetSupportTicketApi.csproj|solutionrelative:dotnetsupportticketapi\\dtos\\updateticketstatusrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:2:0:{F28CF32B-0ED1-CDFD-B499-8663AFEA9059}|DotnetSupportTicketApi\\DotnetSupportTicketApi.csproj|d:\\freelance-reentry-2026\\02-dotnet-support-ticket-api\\dotnetsupportticketapi\\controllers\\ticketscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:2:0:{F28CF32B-0ED1-CDFD-B499-8663AFEA9059}|DotnetSupportTicketApi\\DotnetSupportTicketApi.csproj|solutionrelative:dotnetsupportticketapi\\controllers\\ticketscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F28CF32B-0ED1-CDFD-B499-8663AFEA9059}|DotnetSupportTicketApi\\DotnetSupportTicketApi.csproj|d:\\freelance-reentry-2026\\02-dotnet-support-ticket-api\\dotnetsupportticketapi\\dtos\\getticketrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F28CF32B-0ED1-CDFD-B499-8663AFEA9059}|DotnetSupportTicketApi\\DotnetSupportTicketApi.csproj|solutionrelative:dotnetsupportticketapi\\dtos\\getticketrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F28CF32B-0ED1-CDFD-B499-8663AFEA9059}|DotnetSupportTicketApi\\DotnetSupportTicketApi.csproj|d:\\freelance-reentry-2026\\02-dotnet-support-ticket-api\\dotnetsupportticketapi\\dtos\\ticketresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F28CF32B-0ED1-CDFD-B499-8663AFEA9059}|DotnetSupportTicketApi\\DotnetSupportTicketApi.csproj|solutionrelative:dotnetsupportticketapi\\dtos\\ticketresponse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F28CF32B-0ED1-CDFD-B499-8663AFEA9059}|DotnetSupportTicketApi\\DotnetSupportTicketApi.csproj|d:\\freelance-reentry-2026\\02-dotnet-support-ticket-api\\dotnetsupportticketapi\\dtos\\createticketrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F28CF32B-0ED1-CDFD-B499-8663AFEA9059}|DotnetSupportTicketApi\\DotnetSupportTicketApi.csproj|solutionrelative:dotnetsupportticketapi\\dtos\\createticketrequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F28CF32B-0ED1-CDFD-B499-8663AFEA9059}|DotnetSupportTicketApi\\DotnetSupportTicketApi.csproj|d:\\freelance-reentry-2026\\02-dotnet-support-ticket-api\\dotnetsupportticketapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F28CF32B-0ED1-CDFD-B499-8663AFEA9059}|DotnetSupportTicketApi\\DotnetSupportTicketApi.csproj|solutionrelative:dotnetsupportticketapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F28CF32B-0ED1-CDFD-B499-8663AFEA9059}|DotnetSupportTicketApi\\DotnetSupportTicketApi.csproj|d:\\freelance-reentry-2026\\02-dotnet-support-ticket-api\\dotnetsupportticketapi\\models\\comment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F28CF32B-0ED1-CDFD-B499-8663AFEA9059}|DotnetSupportTicketApi\\DotnetSupportTicketApi.csproj|solutionrelative:dotnetsupportticketapi\\models\\comment.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,36 +22,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 3,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "UpdateTicketStatusRequest.cs",
-              "DocumentMoniker": "D:\\freelance-reentry-2026\\02-dotnet-support-ticket-api\\DotnetSupportTicketApi\\DTOs\\UpdateTicketStatusRequest.cs",
-              "RelativeDocumentMoniker": "DotnetSupportTicketApi\\DTOs\\UpdateTicketStatusRequest.cs",
-              "ToolTip": "D:\\freelance-reentry-2026\\02-dotnet-support-ticket-api\\DotnetSupportTicketApi\\DTOs\\UpdateTicketStatusRequest.cs",
-              "RelativeToolTip": "DotnetSupportTicketApi\\DTOs\\UpdateTicketStatusRequest.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-27T13:44:11.704Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "GetTicketRequest.cs",
-              "DocumentMoniker": "D:\\freelance-reentry-2026\\02-dotnet-support-ticket-api\\DotnetSupportTicketApi\\DTOs\\GetTicketRequest.cs",
-              "RelativeDocumentMoniker": "DotnetSupportTicketApi\\DTOs\\GetTicketRequest.cs",
-              "ToolTip": "D:\\freelance-reentry-2026\\02-dotnet-support-ticket-api\\DotnetSupportTicketApi\\DTOs\\GetTicketRequest.cs",
-              "RelativeToolTip": "DotnetSupportTicketApi\\DTOs\\GetTicketRequest.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-26T14:03:28.202Z"
             },
             {
               "$type": "Document",
@@ -73,46 +36,42 @@
               "RelativeDocumentMoniker": "DotnetSupportTicketApi\\Controllers\\TicketsController.cs",
               "ToolTip": "D:\\freelance-reentry-2026\\02-dotnet-support-ticket-api\\DotnetSupportTicketApi\\Controllers\\TicketsController.cs",
               "RelativeToolTip": "DotnetSupportTicketApi\\Controllers\\TicketsController.cs",
-              "ViewState": "AgIAAMsAAAAAAAAAAAAQwKIAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAFwAAAAAAAAAAAAwwHsAAAAyAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-25T13:39:54.74Z",
+              "WhenOpened": "2026-03-28T14:24:08.213Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "TicketsController.cs",
+              "DocumentMoniker": "D:\\freelance-reentry-2026\\02-dotnet-support-ticket-api\\DotnetSupportTicketApi\\Controllers\\TicketsController.cs",
+              "RelativeDocumentMoniker": "DotnetSupportTicketApi\\Controllers\\TicketsController.cs",
+              "ToolTip": "D:\\freelance-reentry-2026\\02-dotnet-support-ticket-api\\DotnetSupportTicketApi\\Controllers\\TicketsController.cs",
+              "RelativeToolTip": "DotnetSupportTicketApi\\Controllers\\TicketsController.cs",
+              "ViewState": "AgIAANoAAAAAAAAAAAAAADoAAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-28T14:24:23.096Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "TicketResponse.cs",
-              "DocumentMoniker": "D:\\freelance-reentry-2026\\02-dotnet-support-ticket-api\\DotnetSupportTicketApi\\DTOs\\TicketResponse.cs",
-              "RelativeDocumentMoniker": "DotnetSupportTicketApi\\DTOs\\TicketResponse.cs",
-              "ToolTip": "D:\\freelance-reentry-2026\\02-dotnet-support-ticket-api\\DotnetSupportTicketApi\\DTOs\\TicketResponse.cs",
-              "RelativeToolTip": "DotnetSupportTicketApi\\DTOs\\TicketResponse.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAyAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "Comment.cs",
+              "DocumentMoniker": "D:\\freelance-reentry-2026\\02-dotnet-support-ticket-api\\DotnetSupportTicketApi\\Models\\Comment.cs",
+              "RelativeDocumentMoniker": "DotnetSupportTicketApi\\Models\\Comment.cs",
+              "ToolTip": "D:\\freelance-reentry-2026\\02-dotnet-support-ticket-api\\DotnetSupportTicketApi\\Models\\Comment.cs",
+              "RelativeToolTip": "DotnetSupportTicketApi\\Models\\Comment.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-25T13:39:00.304Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "CreateTicketRequest.cs",
-              "DocumentMoniker": "D:\\freelance-reentry-2026\\02-dotnet-support-ticket-api\\DotnetSupportTicketApi\\DTOs\\CreateTicketRequest.cs",
-              "RelativeDocumentMoniker": "DotnetSupportTicketApi\\DTOs\\CreateTicketRequest.cs",
-              "ToolTip": "D:\\freelance-reentry-2026\\02-dotnet-support-ticket-api\\DotnetSupportTicketApi\\DTOs\\CreateTicketRequest.cs",
-              "RelativeToolTip": "DotnetSupportTicketApi\\DTOs\\CreateTicketRequest.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAyAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-25T13:37:42.025Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Program.cs",
-              "DocumentMoniker": "D:\\freelance-reentry-2026\\02-dotnet-support-ticket-api\\DotnetSupportTicketApi\\Program.cs",
-              "RelativeDocumentMoniker": "DotnetSupportTicketApi\\Program.cs",
-              "ToolTip": "D:\\freelance-reentry-2026\\02-dotnet-support-ticket-api\\DotnetSupportTicketApi\\Program.cs",
-              "RelativeToolTip": "DotnetSupportTicketApi\\Program.cs",
-              "ViewState": "AgIAADwAAAAAAAAAAAAAAEwAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-24T14:13:49.501Z"
+              "WhenOpened": "2026-03-28T14:35:20.283Z",
+              "EditorCaption": ""
             }
           ]
         }
