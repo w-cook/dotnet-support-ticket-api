@@ -96,12 +96,11 @@ In progress
 
 ## Current Progress
 
-- `POST /api/tickets` implemented
+- `POST /api/tickets` implemented with input validation and normalization
 - `GET /api/tickets/{id}` implemented
 - `GET /api/tickets` implemented with filtering
-- `PATCH /api/tickets/{id}/status` implemented
-- status history entries are created when ticket status changes
-- status update behavior verified in Swagger and SQL Server Object Explorer
+- `PATCH /api/tickets/{id}/status` implemented with status history tracking
 - `POST /api/tickets/{id}/comments` implemented
 - `GET /api/tickets/{id}/comments` implemented
-- comment creation verified through Swagger and SQL Server Object Explorer
+- `GET /api/tickets/{id}/history` implemented
+- ticket, comment, priority, and status input handling has been standardized for more consistent API behavior

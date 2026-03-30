@@ -11,6 +11,14 @@ namespace DotnetSupportTicketApi.Controllers
     [Route("api/[controller]")]
     public class TicketsController : ControllerBase
     {
+        private static readonly HashSet<string> AllowedPriorities = new(StringComparer.OrdinalIgnoreCase)
+            {
+                "Low",
+                "Medium",
+                "High",
+                "Critical"
+            };
+
         private static readonly HashSet<string> AllowedStatuses = new(StringComparer.OrdinalIgnoreCase)
             {
                 "Open",
@@ -34,23 +42,10 @@ namespace DotnetSupportTicketApi.Controllers
 
             if (ticket == null)
             {
-                return NotFound();
+                return NotFound($"TicketId '{id}' does not exist.");
             }
 
-            var response = new TicketResponse
-            {
-                Id = ticket.Id,
-                Title = ticket.Title,
-                Description = ticket.Description,
-                Priority = ticket.Priority,
-                Status = ticket.Status,
-                CreatedAt = ticket.CreatedAt,
-                UpdatedAt = ticket.UpdatedAt,
-                CreatedByUserId = ticket.CreatedByUserId,
-                AssignedToUserId = ticket.AssignedToUserId
-            };
-
-            return Ok(response);
+            return Ok(MapTicketToResponse(ticket));
         }
 
         [HttpGet]
@@ -60,13 +55,25 @@ namespace DotnetSupportTicketApi.Controllers
 
             if (!string.IsNullOrWhiteSpace(request.Status))
             {
-                var normalizedStatus = request.Status.Trim();
+                var normalizedStatus = NormalizeStatus(request.Status);
+
+                if (!AllowedStatuses.Contains(normalizedStatus))
+                {
+                    return BadRequest($"Status '{normalizedStatus}' is not valid.");
+                }
+
                 query = query.Where(t => t.Status == normalizedStatus);
             }
 
             if (!string.IsNullOrWhiteSpace(request.Priority))
             {
-                var normalizedPriority = request.Priority.Trim();
+                var normalizedPriority = NormalizePriority(request.Priority);
+
+                if (!AllowedPriorities.Contains(normalizedPriority))
+                {
+                    return BadRequest($"Priority '{normalizedPriority}' is not valid.");
+                }
+
                 query = query.Where(t => t.Priority == normalizedPriority);
             }
 
@@ -82,25 +89,14 @@ namespace DotnetSupportTicketApi.Controllers
 
             var tickets = await query
                 .OrderByDescending(t => t.CreatedAt)
-                .Select(t => new TicketResponse
-                {
-                    Id = t.Id,
-                    Title = t.Title,
-                    Description = t.Description,
-                    Priority = t.Priority,
-                    Status = t.Status,
-                    CreatedAt = t.CreatedAt,
-                    UpdatedAt = t.UpdatedAt,
-                    CreatedByUserId = t.CreatedByUserId,
-                    AssignedToUserId = t.AssignedToUserId
-                })
+                .Select(t => MapTicketToResponse(t))
                 .ToListAsync();
 
             return Ok(tickets);
         }
 
         [HttpGet("{id:int}/comments")]
-        public async Task<ActionResult<IEnumerable<CommentResponse>>> GetAll(
+        public async Task<ActionResult<IEnumerable<CommentResponse>>> GetComments(
             [FromRoute] int id)
         {
             var ticket = await _dbContext.Tickets
@@ -108,7 +104,7 @@ namespace DotnetSupportTicketApi.Controllers
 
             if (ticket == null)
             {
-                return NotFound();
+                return NotFound($"TicketId '{id}' does not exist.");
             }
 
             IQueryable<Comment> query = _dbContext.Comments;
@@ -117,17 +113,34 @@ namespace DotnetSupportTicketApi.Controllers
 
             var comments = await query
                 .OrderByDescending(c => c.CreatedAt)
-                .Select(c => new CommentResponse
-                {
-                    Id = c.Id,
-                    TicketId = c.TicketId,
-                    AuthorUserId = c.AuthorUserId,
-                    Body = c.Body,
-                    CreatedAt = c.CreatedAt
-                })
+                .Select(c => MapCommentToResponse(c))
                 .ToListAsync();
 
             return Ok(comments);
+        }
+
+        [HttpGet("{id:int}/history")]
+        public async Task<ActionResult<IEnumerable<StatusHistoryResponse>>> GetHistory(
+            [FromRoute] int id)
+        {
+            var ticket = await _dbContext.Tickets
+                .FirstOrDefaultAsync(t => t.Id == id);
+
+            if (ticket == null)
+            {
+                return NotFound($"TicketId '{id}' does not exist.");
+            }
+
+            IQueryable<StatusHistory> query = _dbContext.StatusHistoryEntries;
+
+            query = query.Where(h => h.TicketId == id);
+
+            var historyEntries = await query
+                .OrderByDescending(h => h.ChangedAt)
+                .Select(h => MapHistoryToResponse(h))
+                .ToListAsync();
+
+            return Ok(historyEntries);
         }
 
         [HttpPost]
@@ -138,7 +151,7 @@ namespace DotnetSupportTicketApi.Controllers
 
             if (!createdByUserExists)
             {
-                return BadRequest($"CreatedByUserId {request.CreatedByUserId} does not exist.");
+                return BadRequest($"CreatedByUserId '{request.CreatedByUserId}' does not exist.");
             }
 
             if (request.AssignedToUserId.HasValue)
@@ -148,17 +161,22 @@ namespace DotnetSupportTicketApi.Controllers
 
                 if (!assignedUserExists)
                 {
-                    return BadRequest($"AssignedToUserId {request.AssignedToUserId.Value} does not exist.");
+                    return BadRequest($"AssignedToUserId '{request.AssignedToUserId.Value}' does not exist.");
                 }
+            }
+
+            var normalizedPriority = NormalizePriority(request.Priority);
+
+            if (!AllowedPriorities.Contains(normalizedPriority))
+            {
+                return BadRequest($"Priority '{normalizedPriority}' is not valid.");
             }
 
             var ticket = new Ticket
             {
-                Title = request.Title,
-                Description = request.Description,
-                Priority = string.IsNullOrWhiteSpace(request.Priority)
-                    ? "Medium"
-                    : request.Priority.Trim(),
+                Title = request.Title.Trim(),
+                Description = request.Description.Trim(),
+                Priority = normalizedPriority,
                 Status = "Open",
                 CreatedAt = DateTime.UtcNow,
                 UpdatedAt = DateTime.UtcNow,
@@ -169,20 +187,7 @@ namespace DotnetSupportTicketApi.Controllers
             _dbContext.Tickets.Add(ticket);
             await _dbContext.SaveChangesAsync();
 
-            var response = new TicketResponse
-            {
-                Id = ticket.Id,
-                Title = ticket.Title,
-                Description = ticket.Description,
-                Priority = ticket.Priority,
-                Status = ticket.Status,
-                CreatedAt = ticket.CreatedAt,
-                UpdatedAt = ticket.UpdatedAt,
-                CreatedByUserId = ticket.CreatedByUserId,
-                AssignedToUserId = ticket.AssignedToUserId
-            };
-
-            return CreatedAtAction(nameof(GetById), new { id = ticket.Id }, response);
+            return CreatedAtAction(nameof(GetById), new { id = ticket.Id }, MapTicketToResponse(ticket));
         }
 
         [HttpPost("{id:int}/comments")]
@@ -195,7 +200,7 @@ namespace DotnetSupportTicketApi.Controllers
 
             if (ticket == null)
             {
-                return NotFound($"TicketId {id} does not exist.");
+                return NotFound($"TicketId '{id}' does not exist.");
             }
 
             var author = await _dbContext.AppUsers
@@ -203,19 +208,7 @@ namespace DotnetSupportTicketApi.Controllers
 
             if (author == null)
             {
-                return BadRequest($"AuthorUserId {request.AuthorUserId} does not exist.");
-            }
-
-            var normalizedBody = request.Body.Trim();
-
-            if (string.IsNullOrWhiteSpace(normalizedBody))
-            {
-                return BadRequest($"Comment Body is required.");
-            }
-
-            if (normalizedBody.Length >= 2000) 
-            {
-                return BadRequest($"Comment Body must be less than 2000 characters.");
+                return BadRequest($"AuthorUserId '{request.AuthorUserId}' does not exist.");
             }
 
             var comment = new Comment
@@ -224,23 +217,14 @@ namespace DotnetSupportTicketApi.Controllers
                 Ticket = ticket,
                 AuthorUserId = author.Id,
                 AuthorUser = author,
-                Body = normalizedBody,
+                Body = request.Body.Trim(),
                 CreatedAt = DateTime.UtcNow
             };
 
             _dbContext.Comments.Add(comment);
             await _dbContext.SaveChangesAsync();
 
-            var response = new CommentResponse
-            {
-                Id = comment.Id,
-                TicketId = comment.TicketId,
-                AuthorUserId = comment.AuthorUserId,
-                Body = comment.Body,
-                CreatedAt = comment.CreatedAt
-            };
-
-            return CreatedAtAction(nameof(GetById), new { id = comment.Id }, response);
+            return CreatedAtAction(nameof(GetById), new { id = comment.Id }, MapCommentToResponse(comment));
         }
 
         [HttpPatch("{id:int}/status")]
@@ -253,15 +237,10 @@ namespace DotnetSupportTicketApi.Controllers
 
             if (ticket == null)
             {
-                return NotFound();
+                return NotFound($"TicketId '{id}' does not exist.");
             }
 
             var normalizedStatus = NormalizeStatus(request.Status);
-
-            if (string.IsNullOrWhiteSpace(normalizedStatus))
-            {
-                return BadRequest("Status is required.");
-            }
 
             if (!AllowedStatuses.Contains(normalizedStatus))
             {
@@ -270,20 +249,7 @@ namespace DotnetSupportTicketApi.Controllers
 
             if (string.Equals(ticket.Status, normalizedStatus, StringComparison.OrdinalIgnoreCase))
             {
-                var unchangedResponse = new TicketResponse
-                {
-                    Id = ticket.Id,
-                    Title = ticket.Title,
-                    Description = ticket.Description,
-                    Priority = ticket.Priority,
-                    Status = ticket.Status,
-                    CreatedAt = ticket.CreatedAt,
-                    UpdatedAt = ticket.UpdatedAt,
-                    CreatedByUserId = ticket.CreatedByUserId,
-                    AssignedToUserId = ticket.AssignedToUserId
-                };
-
-                return Ok(unchangedResponse);
+                return Ok(MapTicketToResponse(ticket));
             }
 
             var oldStatus = ticket.Status;
@@ -303,7 +269,12 @@ namespace DotnetSupportTicketApi.Controllers
 
             await _dbContext.SaveChangesAsync();
 
-            var response = new TicketResponse
+            return Ok(MapTicketToResponse(ticket));
+        }
+
+        private static TicketResponse MapTicketToResponse(Ticket ticket)
+        {
+            return new TicketResponse
             {
                 Id = ticket.Id,
                 Title = ticket.Title,
@@ -315,8 +286,42 @@ namespace DotnetSupportTicketApi.Controllers
                 CreatedByUserId = ticket.CreatedByUserId,
                 AssignedToUserId = ticket.AssignedToUserId
             };
+        }
 
-            return Ok(response);
+        private static CommentResponse MapCommentToResponse(Comment comment)
+        {
+            return new CommentResponse
+            {
+                Id = comment.Id,
+                TicketId = comment.TicketId,
+                AuthorUserId = comment.AuthorUserId,
+                Body = comment.Body,
+                CreatedAt = comment.CreatedAt
+            };
+        }
+
+        private static StatusHistoryResponse MapHistoryToResponse(StatusHistory entry)
+        {
+            return new StatusHistoryResponse
+            {
+                Id = entry.Id,
+                TicketId = entry.TicketId,
+                OldStatus = entry.OldStatus,
+                NewStatus = entry.NewStatus,
+                ChangedAt = entry.ChangedAt
+            };
+        }
+
+        private static string NormalizePriority(string priority)
+        {
+            return priority.Trim().ToLowerInvariant() switch
+            {
+                "low" => "Low",
+                "medium" => "Medium",
+                "high" => "High",
+                "critical" => "Critical",
+                _ => priority
+            };
         }
 
         private static string NormalizeStatus(string status)
