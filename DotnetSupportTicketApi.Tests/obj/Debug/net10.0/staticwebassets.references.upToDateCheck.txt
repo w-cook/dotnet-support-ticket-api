@@ -1,0 +1,8 @@
+D:\freelance-reentry-2026\02-dotnet-support-ticket-api\DotnetSupportTicketApi\obj\Debug\net10.0\staticwebassets.build.json
+D:\freelance-reentry-2026\02-dotnet-support-ticket-api\DotnetSupportTicketApi\obj\Debug\net10.0\staticwebassets.build.json
+D:\freelance-reentry-2026\02-dotnet-support-ticket-api\DotnetSupportTicketApi\obj\Debug\net10.0\staticwebassets.build.json
+D:\freelance-reentry-2026\02-dotnet-support-ticket-api\DotnetSupportTicketApi\obj\Debug\net10.0\staticwebassets.build.json
+D:\freelance-reentry-2026\02-dotnet-support-ticket-api\DotnetSupportTicketApi\obj\Debug\net10.0\staticwebassets.build.json
+D:\freelance-reentry-2026\02-dotnet-support-ticket-api\DotnetSupportTicketApi\obj\Debug\net10.0\staticwebassets.build.json
+D:\freelance-reentry-2026\02-dotnet-support-ticket-api\DotnetSupportTicketApi\obj\Debug\net10.0\staticwebassets.build.json
+D:\freelance-reentry-2026\02-dotnet-support-ticket-api\DotnetSupportTicketApi\obj\Debug\net10.0\staticwebassets.build.json

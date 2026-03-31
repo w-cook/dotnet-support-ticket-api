@@ -88,7 +88,7 @@ In progress
 - PATCH /tickets/{id}/status
 - POST /tickets/{id}/comments
 
-### Planned Filters for GET /tickets
+### Filters for GET /tickets
 - status
 - priority
 - assignedToUserId
@@ -104,3 +104,21 @@ In progress
 - `GET /api/tickets/{id}/comments` implemented
 - `GET /api/tickets/{id}/history` implemented
 - ticket, comment, priority, and status input handling has been standardized for more consistent API behavior
+- integration tests added for core API workflows
+- health endpoint smoke test implemented
+- ticket creation workflow test implemented
+- status update + history workflow test implemented
+- comment creation + retrieval workflow test implemented
+- test suite configured to use a separate SQLite in-memory database
+
+## Testing
+
+The project includes integration tests for key API workflows using xUnit and ASP.NET Core's integration testing infrastructure.
+
+Current automated coverage includes:
+- health endpoint smoke test
+- ticket creation
+- status update with history verification
+- comment creation and retrieval
+
+Tests run against a separate SQLite in-memory test database so they do not write to the main development database.
