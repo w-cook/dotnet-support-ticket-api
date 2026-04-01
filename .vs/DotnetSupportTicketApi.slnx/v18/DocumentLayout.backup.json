@@ -63,8 +63,7 @@
               "RelativeToolTip": "DotnetSupportTicketApi\\DTOs\\CreateCommentRequest.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-31T16:09:49.09Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-31T16:09:49.09Z"
             },
             {
               "$type": "Document",
@@ -76,8 +75,7 @@
               "RelativeToolTip": "DotnetSupportTicketApi.Tests\\TicketsEndpointTests.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-31T14:48:11.453Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-31T14:48:11.453Z"
             },
             {
               "$type": "Document",
@@ -89,8 +87,7 @@
               "RelativeToolTip": "DotnetSupportTicketApi.Tests\\HealthEndpointTests.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAA+AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-31T14:12:36.717Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-31T14:12:36.717Z"
             },
             {
               "$type": "Document",
@@ -102,8 +99,7 @@
               "RelativeToolTip": "DotnetSupportTicketApi\\Program.cs",
               "ViewState": "AgIAAGMAAAAAAAAAAAAAAHIAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-31T14:11:11.366Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-31T14:11:11.366Z"
             },
             {
               "$type": "Document",
@@ -115,8 +111,7 @@
               "RelativeToolTip": "DotnetSupportTicketApi\\Controllers\\TicketsController.cs",
               "ViewState": "AgIAALoAAAAAAAAAAAAowIAAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-28T14:24:08.213Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-28T14:24:08.213Z"
             }
           ]
         }

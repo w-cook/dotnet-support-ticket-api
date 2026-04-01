@@ -1,52 +1,107 @@
 # ASP.NET Core Support Ticket API
 
-A focused backend portfolio project built with C# and ASP.NET Core Web API.
+A backend portfolio project built with C# and ASP.NET Core Web API to model a simple support and issue-tracking workflow.
 
 ## Purpose
 
 This project is designed to demonstrate practical backend development skills in a way that supports:
+
 - remote .NET / C# job applications
-- maintenance and support-oriented software roles
-- future freelance work involving ASP.NET Core bug fixing and API improvement
+- maintenance, support, and internal-tools oriented software roles
+- future freelance work involving ASP.NET Core bug fixing, debugging, and API improvement
 
 ## Project Concept
 
-The API models a simple support / issue tracking workflow with tickets, comments, users, and status history.
+The API models a lightweight support-ticket workflow with:
 
-## MVP Goals
+- tickets
+- comments
+- users
+- status history
 
-- create ticket
-- get ticket by ID
+The project is intentionally scoped around **support and maintenance workflows** rather than flashy greenfield features. The goal is to demonstrate practical API design, relational data modeling, maintainability, and testing in a format that is easy to evaluate as a portfolio asset.
+
+## Current Features
+
+Implemented features currently include:
+
+- create a ticket
+- retrieve a ticket by ID
 - list tickets
-- filter tickets
+- filter tickets by status, priority, creator, and assignee
 - update ticket status
-- add comments
-- track status history
+- automatically record status history entries when status changes
+- create comments for a ticket
+- retrieve comments for a ticket
+- retrieve status history for a ticket
+- standardized input validation and normalization for ticket, comment, priority, and status data
 
-## Planned Tech
+## API Overview
 
-- .NET 8
-- ASP.NET Core Web API
-- Entity Framework Core
-- PostgreSQL or SQL Server
-- Swagger / OpenAPI
-- xUnit
-- Docker
+Swagger UI showing the current implemented endpoint surface:
 
-## Why This Project
+![Swagger UI overview](./docs/images/support-ticket-api-swagger-overview.png)
 
-This project is intentionally scoped around support and maintenance workflows rather than flashy greenfield features.
+## API Endpoints
 
-The goal is to create a portfolio asset that demonstrates:
-- practical API design
-- relational data modeling
-- maintainability
-- debugging and support mindset
-- clear documentation
+### Health
+- `GET /api/health`
 
-## Status
+### Tickets
+- `POST /api/tickets`
+- `GET /api/tickets`
+- `GET /api/tickets/{id}`
+- `PATCH /api/tickets/{id}/status`
 
-In progress
+### Comments
+- `POST /api/tickets/{id}/comments`
+- `GET /api/tickets/{id}/comments`
+
+### Status History
+- `GET /api/tickets/{id}/history`
+
+### Supported Filters for `GET /api/tickets`
+- `status`
+- `priority`
+- `createdByUserId`
+- `assignedToUserId`
+
+## Example Requests
+
+### Create Ticket
+
+`POST /api/tickets`
+
+```json
+{
+  "title": "Customer cannot access billing page",
+  "description": "Billing page returns an error for one tenant.",
+  "priority": "High",
+  "createdByUserId": 1,
+  "assignedToUserId": 2
+}
+```
+
+### Update Ticket Status
+
+`PATCH /api/tickets/{id}/status`
+
+```json
+{
+  "status": "Resolved"
+}
+```
+
+### Create Comment
+
+`POST /api/tickets/{id}/comments`
+
+```json
+{
+  "authorUserId": 2,
+  "body": "Issue reproduced and fix has been verified in staging."
+}
+```
 
 ## Core Entities
 
@@ -68,7 +123,7 @@ In progress
 - Body
 - CreatedAt
 
-### User
+### AppUser
 - Id
 - Name
 - Email
@@ -80,45 +135,89 @@ In progress
 - NewStatus
 - ChangedAt
 
-## MVP Endpoints
+## Tech Stack
 
-- POST /tickets
-- GET /tickets/{id}
-- GET /tickets
-- PATCH /tickets/{id}/status
-- POST /tickets/{id}/comments
-
-### Filters for GET /tickets
-- status
-- priority
-- assignedToUserId
-- createdByUserId
-
-## Current Progress
-
-- `POST /api/tickets` implemented with input validation and normalization
-- `GET /api/tickets/{id}` implemented
-- `GET /api/tickets` implemented with filtering
-- `PATCH /api/tickets/{id}/status` implemented with status history tracking
-- `POST /api/tickets/{id}/comments` implemented
-- `GET /api/tickets/{id}/comments` implemented
-- `GET /api/tickets/{id}/history` implemented
-- ticket, comment, priority, and status input handling has been standardized for more consistent API behavior
-- integration tests added for core API workflows
-- health endpoint smoke test implemented
-- ticket creation workflow test implemented
-- status update + history workflow test implemented
-- comment creation + retrieval workflow test implemented
-- test suite configured to use a separate SQLite in-memory database
+- .NET 10
+- ASP.NET Core Web API
+- Entity Framework Core
+- SQL Server LocalDB
+- OpenAPI
+- Swagger UI
+- xUnit
+- SQLite (in-memory, for integration tests)
 
 ## Testing
 
-The project includes integration tests for key API workflows using xUnit and ASP.NET Core's integration testing infrastructure.
+The project includes integration tests for key API workflows using xUnit and ASP.NET Core integration testing infrastructure.
 
 Current automated coverage includes:
-- health endpoint smoke test
-- ticket creation
-- status update with history verification
-- comment creation and retrieval
 
-Tests run against a separate SQLite in-memory test database so they do not write to the main development database.
+- health endpoint smoke test
+- ticket creation workflow
+- status update with history verification
+- comment creation and retrieval workflow
+
+Tests run against a **separate SQLite in-memory database**, so they do not write to the main development database.
+
+## Conventions and Notes
+
+For additional details on route style, validation rules, status and priority normalization, and general API behavior conventions, see:
+
+- [API Conventions](./notes/ApiConventions.md)
+
+## Local Setup
+
+### Prerequisites
+- .NET 10 SDK
+- SQL Server LocalDB
+- Visual Studio or another compatible .NET development environment
+
+### Run the application
+1. Restore NuGet packages
+2. Apply the database migration
+3. Run the API project
+4. Open Swagger UI in the browser
+
+### Database
+The main application uses SQL Server LocalDB for development.
+
+### Test database
+The integration tests use a separate SQLite in-memory database configured specifically for the test host.
+
+## Current Status
+
+The project is currently in active development and already includes a usable core workflow for tickets, comments, and status tracking.
+
+At this stage, the project demonstrates:
+
+- practical CRUD and workflow-oriented API development
+- relational modeling with EF Core
+- support/maintenance-oriented feature design
+- consistent validation and normalization
+- integration testing of real API workflows
+- separation between development and test database environments
+
+## Why This Project Matters
+
+This project is intentionally designed to be more than a basic CRUD demo.
+
+It is meant to show the kind of work commonly involved in real support and maintenance-oriented backend roles:
+
+- extending existing application behavior
+- tracking workflow state changes
+- preserving audit-style history
+- validating and normalizing input consistently
+- testing behavior through real API requests instead of only isolated methods
+
+That makes it relevant both for traditional .NET/backend roles and for freelance work involving debugging, maintenance, and incremental API improvements.
+
+## Possible Next Improvements
+
+Some natural next steps for the project include:
+
+- service layer extraction
+- pagination for ticket lists
+- richer history/audit metadata
+- additional integration test coverage
+- Docker support
+- authentication / authorization
