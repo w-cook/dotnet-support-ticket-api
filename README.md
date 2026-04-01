@@ -221,3 +221,7 @@ Some natural next steps for the project include:
 - additional integration test coverage
 - Docker support
 - authentication / authorization
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
